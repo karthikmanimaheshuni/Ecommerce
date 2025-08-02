@@ -38,6 +38,7 @@ const Order = () => {
               date: order.date,
               name: product?.name || "Unknown Product",
               price: product?.price || 0,
+              inventory : product?.inventory || 0 ,
               image: product?.image || [],
             });
           });
@@ -90,6 +91,7 @@ const Order = () => {
                       {currency}
                       {item.price}
                     </p>
+                    <p>Inventory:{item.inventory}</p>
                     <p>Qty: {item.quantity}</p>
                     <p>Size: {item.size}</p>
                   </div>

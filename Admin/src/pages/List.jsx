@@ -62,6 +62,7 @@ const removeProduct =async(id)=>{
         <p>Name</p>
         <p>Category</p>
         <p>Price</p>
+        <p>Inventory</p>
         <p className="text-center">Action</p>
       </div>
 
@@ -76,6 +77,7 @@ const removeProduct =async(id)=>{
             <p>{item.name}</p>
             <p>{item.category}</p>
             <p>{currency}{item.price}</p>
+            <p>{item.inventory}</p>
             <button onClick={()=>removeProduct(item._id)} className="text-red-500 cursor-pointer font-bold">X</button>
           </div>
         ))

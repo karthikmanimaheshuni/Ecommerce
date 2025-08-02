@@ -14,6 +14,7 @@ const Add = ({token}) => {
     const [name,setName] = useState('');
     const [description,setDescription] = useState('');
     const [price,setPrice]  = useState('');
+    const [inventory,setInventory]  = useState('');
     const [category,setCategory] = useState('Men');
     const [subCategory,setSubCategory] = useState('Topwear');
     const [bestseller,setBestseller] = useState(false);
@@ -28,6 +29,7 @@ const Add = ({token}) => {
             formData.append("name",name);
             formData.append("description",description);
             formData.append("price",price);
+            formData.append("inventory",inventory);
             formData.append("category",category);
             formData.append("subCategory",subCategory);
             formData.append("bestseller",bestseller);
@@ -119,6 +121,10 @@ const Add = ({token}) => {
             <div>
                 <p className='mb-2'>Product Price</p>
                 <input onChange={(e)=>setPrice(e.target.value)} value={price} className='w-full px-3 py-2 sm:w-[120px]' type='Number' placeholder='25'/>
+            </div>
+            <div>
+                <p className='mb-2'>Inventory</p>
+                <input onChange={(e)=>setInventory(e.target.value)} value={inventory} className='w-full px-3 py-2 sm:w-[120px]' type='Number' placeholder='25'/>
             </div>
         </div>
 
