@@ -12,9 +12,9 @@ const ProductItems = ({id,image,name,price,inventory}) => {
             <div className='overflow-hidden'>
                 <img className='hover:scale-110 transition ease-in-out'src={image[0]} alt="image"/>
                 <p className='pt-3 pb-1 text-sm'>{name}</p>
-                <p className='text-sm font-medium'>{currency}{price}</p>
-                <p className='text-sm font-medium'>{inventory}</p>
-
+                <p className='text-sm font-medium text-gray-900'>{currency}{price}</p>
+                <p className={`text-sm font-medium ${inventory > 5 ? 'text-green-600':'text-red-600'}`}>Left:{inventory}</p>
+                
 
             </div>
 
