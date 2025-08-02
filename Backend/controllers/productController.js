@@ -106,3 +106,14 @@ export const singleProductInfo = async(req,res)=>{
     
 }
 
+
+export const updateInventory = async (req, res) => {
+    try {
+        const { id, change } = req.body; // change can be +1 or -1
+        const product = await productModel.findByIdAndUpdate(id, { $inc: { inventory: change } }, { new: true });
+        if (!product) return res.json({ success: false, message: "Product not found" });
+        res.json({ success: true, message: "Inventory updated", product });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+};

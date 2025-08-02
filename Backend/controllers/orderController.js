@@ -1,36 +1,57 @@
 //placing order using cod
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
+import productModel from "../models/productModel.js";
 
-export const placeOrder = async(req,res)=>{
+export const placeOrder = async (req, res) => {
+  try {
+    const userId = req.user.id; // From JWT middleware
+    const { items, amount, address } = req.body;
 
-    try {
-        const userId = req.user.id;
-        const {items ,amount,address} = req.body;
-        const orderData = {
-            userId,
-            items,
-            amount,
-            address,
-            paymentMethod:'COD',
-            payment:false,
-            date :Date.now()
-
-        }
-
-        const newOrder = new orderModel(orderData);
-        await newOrder.save();
-
-        await userModel.findByIdAndUpdate(userId,{cartData:{}});//clear the cart 
-
-        res.json({success:true,message:"order placed"})
-
-    } catch (error) {
-        console.log(error);
-        res.json({success:false,message:error.message});
+    // ✅ Check inventory for all products before placing the order
+    for (const item of items) {
+      const product = await productModel.findById(item.itemId);
+      if (!product) {
+        return res.json({ success: false, message: `Product not found` });
+      }
+      if (product.inventory < item.quantity) {
+        return res.json({
+          success: false,
+          message: `Not enough stock for ${product.name}. Available: ${product.inventory}`,
+        });
+      }
     }
 
-}
+    // ✅ Deduct inventory for each item after validation
+    for (const item of items) {
+      await productModel.findByIdAndUpdate(item.itemId, {
+        $inc: { inventory: -item.quantity },
+      });
+    }
+
+    // ✅ Create order
+    const orderData = {
+      userId,
+      items,
+      amount,
+      address,
+      paymentMethod: "COD",
+      payment: false,
+      date: Date.now(),
+    };
+
+    const newOrder = new orderModel(orderData);
+    await newOrder.save();
+
+    // ✅ Clear the user's cart
+    await userModel.findByIdAndUpdate(userId, { cartData: {} });
+
+    res.json({ success: true, message: "Order placed successfully" });
+  } catch (error) {
+    console.error("❌ Error placing order:", error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 //using stripe
 export const placeOrderStripe = async(req,res)=>{
