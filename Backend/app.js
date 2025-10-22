@@ -32,7 +32,8 @@ const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
 app.use(cors({ credentials:true, 
          origin: [
         "http://localhost:5173",
-        "http://ecommerce-env.eba-jb3sprw8.ap-south-1.elasticbeanstalk.com"
+        "http://ecommerce-env.eba-jb3sprw8.ap-south-1.elasticbeanstalk.com",
+        "https://ksfashionz-frontend.vercel.app/"
     ]
  }));
 app.use(express.json());
