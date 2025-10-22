@@ -1,4 +1,5 @@
 import {v2 as cloudinary} from "cloudinary"
+//import { CloudinaryStorage } from "multer-storage-cloudinary";
 import productModel from "../models/productModel.js";
 
 
@@ -49,6 +50,7 @@ export const addProduct = async(req,res)=>{
     } catch (error) {
 
         console.log(error);
+        res.status(500).json({ success: false, message: error.message });
         res.json({success:false,message:error.message});
         
         

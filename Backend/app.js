@@ -29,13 +29,26 @@ connectCloudinary();
 
 // Middleware
 const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
-app.use(cors({ credentials:true, 
-         origin: [
-        "http://localhost:5173",
-        "http://ecommerce-env.eba-jb3sprw8.ap-south-1.elasticbeanstalk.com",
-        "https://ksfashionz-frontend.vercel.app"
-    ]
- }));
+
+app.use(cors({
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            "http://localhost:5174",
+            "http://localhost:5173",
+             "http://ecommerce-env.eba-jb3sprw8.ap-south-1.elasticbeanstalk.com",
+            "https://ksfashionz-frontend.vercel.app"
+        ];
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization","token"],
+}));
+
 app.use(express.json());
 
 // API routes
@@ -59,6 +72,9 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(buildPath, "index.html"));
   });
 }
+app.get('/', (req, res) => {
+    res.send('Backend is running!');
+});
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`✅ Server started on port: ${port}`);
