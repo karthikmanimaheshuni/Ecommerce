@@ -13,6 +13,10 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 
 dotenv.config();
+console.log("✅ Environment check");
+console.log("MONGO_URI:", !!process.env.MONGODB_URI);
+console.log("CLOUD_NAME:", process.env.CLOUD_NAME);
+console.log("NODE_ENV:", process.env.NODE_ENV);
 
 // Check env
 if (!process.env.MONGODB_URI) {
