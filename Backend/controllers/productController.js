@@ -1,5 +1,5 @@
 import {v2 as cloudinary} from "cloudinary"
-import { CloudinaryStorage } from "multer-storage-cloudinary";
+//import { CloudinaryStorage } from "multer-storage-cloudinary";
 import productModel from "../models/productModel.js";
 
 
@@ -78,9 +78,17 @@ export const addProduct = async (req, res) => {
     } = req.body;
 
     // Handle file uploads (Cloudinary gives file.path = image URL)
-    const imagesUrl = Object.values(req.files || {})
-      .flat()
-      .map((file) => file.path);
+    const imagesUrl = await Promise.all(
+    Object.values(req.files || {}).flat().map(file => 
+        new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream({ folder: "ksfashionz" }, (err, result) => {
+                if (err) reject(err);
+                else resolve(result.secure_url);
+            });
+            stream.end(file.buffer);
+        })
+    )
+);
 
     // Validate required fields
     if (!name || !description || !category || !price) {

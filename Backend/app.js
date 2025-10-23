@@ -31,16 +31,17 @@ connectCloudinary();
 // Middleware
 const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://ecommerce-env.eba-jb3sprw8.ap-south-1.elasticbeanstalk.com",
+    "https://ksfashionz-frontend.vercel.app"
+];
+
 app.use(cors({
     origin: (origin, callback) => {
-        const allowedOrigins = [
-            "http://localhost:5174",
-            "http://localhost:5173",
-             "http://ecommerce-env.eba-jb3sprw8.ap-south-1.elasticbeanstalk.com",
-            "https://ksfashionz-frontend.vercel.app",
-            "https://ksfashionz-frontend-kbkjf6thf-karthikmanis-projects.vercel.app"
-        ];
-        if (!origin || allowedOrigins.includes(origin)) {
+        // Allow all Vercel preview URLs dynamically
+        if (!origin || origin.includes(".vercel.app") || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             callback(new Error("Not allowed by CORS"));
@@ -48,7 +49,7 @@ app.use(cors({
     },
     credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization","token"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"]
 }));
 
 app.use(express.json());
