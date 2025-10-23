@@ -43,7 +43,11 @@ connectCloudinary();
     "http://localhost:5173", 
     "http://ecommerce-env.eba-jb3sprw8.ap-south-1.elasticbeanstalk.com",
      "https://ksfashionz-frontend.vercel.app",
-     "https://ksfashionz-backend.vercel.app"
+     "https://ksfashionz-backend.vercel.app",
+     "https://ksfashionz-admin.vercel.app",
+     "http://localhost:3000",
+     "http:localhost:5174"
+
      ] ,
     
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
