@@ -22,10 +22,10 @@ if (!process.env.MONGODB_URI) {
 console.log("Loaded Mongo URI: ✅ Found");
 
 // ES module __dirname fix
-// const __filename = fileURLToPath(import.meta.url);
-// console.log(__filename);
-// const __dirname = path.dirname(__filename);
-// console.log(__dirname);
+const __filename = fileURLToPath(import.meta.url);
+console.log(__filename);
+const __dirname = path.dirname(__filename);
+console.log(__dirname);
 
 // App config
 const app = express();
