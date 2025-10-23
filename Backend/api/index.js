@@ -64,11 +64,11 @@ app.use('/api/metrics', analyticsRouter);
 app.get('/api', (req, res) => res.send("API working"));
 
 // -------------------- Serve React build in production --------------------
-if (process.env.NODE_ENV === "production") {
-  const buildPath = path.join(__dirname, "build");
-  app.use(express.static(buildPath));
-  app.get("*", (req, res) => res.sendFile(path.join(buildPath, "index.html")));
-}
+// if (process.env.NODE_ENV === "production") {
+//   const buildPath = path.join(__dirname, "build");
+//   app.use(express.static(buildPath));
+//   app.get("*", (req, res) => res.sendFile(path.join(buildPath, "index.html")));
+// }
 
 // Root route
 app.get('/', (req, res) => res.send('Backend is running!'));
