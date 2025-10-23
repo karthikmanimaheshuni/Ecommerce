@@ -12,8 +12,9 @@ metrics = db["network_metrics"]
 
 # Endpoints to monitor
 ENDPOINTS = [
-    "https://ksfashionz-frontend.vercel.app/api/product",
-    "https://ksfashionz-frontend.vercel.app/api/users",
+    "https://ksfashionz-frontend.vercel.app/product",
+    "https://ksfashionz-frontend.vercel.app",
+    "https://ksfashionz-frontend.vercel.app/collection",
     "http://localhost:5173",
     "http://localhost:5173/collection"
 ]
