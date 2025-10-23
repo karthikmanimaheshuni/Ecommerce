@@ -14,6 +14,8 @@ metrics = db["network_metrics"]
 ENDPOINTS = [
     "https://ksfashionz-frontend.vercel.app/api/product",
     "https://ksfashionz-frontend.vercel.app/api/users",
+    "http://localhost:5173",
+    "http://localhost:5173/collection"
 ]
 
 # Function to ping endoints

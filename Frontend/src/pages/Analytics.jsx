@@ -9,7 +9,7 @@ export default function Analytics() {
 
   // 🔹 Define latency threshold for anomaly detection (ms)
   const LATENCY_THRESHOLD = 1000;
-
+  console.log(backendUrl);
   useEffect(() => {
     fetch(`${backendUrl}/api/metrics`)
       .then((res) => res.json())
