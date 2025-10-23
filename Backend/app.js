@@ -14,6 +14,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 console.log("Loaded Mongo URI:", process.env.MONGODB_URI ? "✅ Found" : "❌ Missing");
+console.log("Mongo URI:", process.env.MONGODB_URI);
 
 // ES module __dirname fix
 const __filename = fileURLToPath(import.meta.url);
@@ -36,7 +37,8 @@ app.use(cors({
             "http://localhost:5174",
             "http://localhost:5173",
              "http://ecommerce-env.eba-jb3sprw8.ap-south-1.elasticbeanstalk.com",
-            "https://ksfashionz-frontend.vercel.app"
+            "https://ksfashionz-frontend.vercel.app",
+            "https://ksfashionz-frontend-kbkjf6thf-karthikmanis-projects.vercel.app"
         ];
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
@@ -79,3 +81,5 @@ app.get('/', (req, res) => {
 app.listen(port, "0.0.0.0", () => {
   console.log(`✅ Server started on port: ${port}`);
 });
+
+export default app;
