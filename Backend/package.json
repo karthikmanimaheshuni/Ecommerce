@@ -11,8 +11,9 @@
     "server": "nodemon app.js"
   },
   "dependencies": {
+    "@fluidjs/multer-cloudinary": "^1.0.4",
     "bcrypt": "^6.0.0",
-    "cloudinary": "^2.7.0",
+    "cloudinary": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",

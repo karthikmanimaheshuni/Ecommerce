@@ -8,7 +8,10 @@
         "includeFiles": [
           "dist/**"
         ]
-      }
+      },
+       "env": {
+      "NPM_FLAGS": "--legacy-peer-deps"
+    }
     }
   ],
   "routes": [
