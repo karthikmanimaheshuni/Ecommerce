@@ -1,13 +1,22 @@
 import mongoose from "mongoose";
 import axios from "axios";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-dotenv.config();
+// Load .env from project root explicitly
+dotenv.config({ path: path.join(__dirname, "../.env") });
+
+
 
 // ----------------- CONFIG -----------------
 const MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI) throw new Error("❌ MONGODB_URI is missing");
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
+if (!MONGODB_URI) throw new Error("❌ MONGODB_URI is missing");
+console.log("mongodb fetched 🤘")
 const ENDPOINTS = [
   "https://ksfashionz-frontend.vercel.app/product",
   "https://ksfashionz-frontend.vercel.app",
