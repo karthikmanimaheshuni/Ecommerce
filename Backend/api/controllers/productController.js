@@ -1,7 +1,7 @@
 import {v2 as cloudinary} from "cloudinary"
 //import { CloudinaryStorage } from "multer-storage-cloudinary";
 import productModel from "../models/productModel.js";
-
+import  connectdb  from "../config/mongodb.js";
 
 {/** function for add product */}
 
@@ -133,7 +133,7 @@ export const addProduct = async(req,res)=>{
 export const listProducts = async(req,res)=>{
 
     try {
-        
+        await connectdb(); 
         const product = await productModel.find({});
         res.json({success:true , product})
 
